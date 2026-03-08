@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Corazón de palabras</title>
+
+<style>
+
+body{
+background:#0b1522;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
+}
+
+/* contenedor del corazón */
+.container{
+position:relative;
+width:800px;
+height:700px;
+animation:latido 1s infinite;
+}
+
+/* palabras del corazón */
+.word{
+position:absolute;
+color:#00c3ff;
+font-size:22px;
+text-shadow:0 0 10px yellow;
+}
+
+/* texto central */
+.center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+display:flex;
+align-items:center;
+gap:15px;
+font-size:60px;
+font-weight:bold;
+color:yellow;
+}
+
+.heart{
+font-size:55px;
+}
+
+/* animación del corazón */
+@keyframes latido{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="heart">
+
+<div class="center">
+<span>Maru</span>
+<span class="heart">❤️</span>
+<span>Sofi</span>
+</div>
+
+</div>
+
+<script>
+
+/* palabras que forman el corazón */
+const words = [
+"Estrellita","Solecito","Besos","Te Amo","Mi Vida","Corazón",
+"Abrazo","Ternura","Pasión","Contigo","Mi Cielo","Dulzura",
+"Siempre","Juntos","Te Quiero","Eterno","Mi Amor","Latido",
+"Miradas","Sueños","Destello","Encanto","Magia","Amarte"
+];
+
+const heart = document.getElementById("heart");
+
+let scale = 18;
+let i = 0;
+
+/* ecuación matemática del corazón */
+for(let t=0; t<Math.PI*2; t+=0.15){
+
+let x = 16*Math.pow(Math.sin(t),3);
+let y = 13*Math.cos(t) -5*Math.cos(2*t) -2*Math.cos(3*t) -Math.cos(4*t);
+
+let span = document.createElement("span");
+
+span.className="word";
+span.innerText = words[i % words.length];
+
+span.style.left = 400 + x*scale + "px";
+span.style.top = 350 - y*scale + "px";
+
+heart.appendChild(span);
+
+i++;
+
+}
+
+</script>
+
+</body>
+</html>
